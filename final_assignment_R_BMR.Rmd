@@ -58,14 +58,13 @@ Use `table()` again, this time to create a "contingency table" (cross tabulation
 table(protein_data$LipoP_Localisation, protein_data$SignalP_YesNo)
 ```
 
-#### Assignment 2
+#### Assignment 3
 
 First run the chunk below to get a new column for the TMHMM analysis, giving a simplified version of column `TMHMM_PredHel`. If the number of transmembrane helices is bigger then 1, it is reduced to "2+"
 
 ```{r}
 protein_data$TMHMM_PredHelSimple <- protein_data$TMHMM_PredHel
 protein_data$TMHMM_PredHelSimple <- ifelse(protein_data$TMHMM_PredHel > 1, "2+", protein_data$TMHMM_PredHel)
-#protein_data$TMHMM_PredHelSimple 
 ```
 
 Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses? What does this say?
@@ -74,5 +73,55 @@ Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predict
 table(protein_data$SignalP_YesNo, protein_data$TMHMM_PredHelSimple)
 ```
 
+
+#### Assignment 4
+
+Find out how many proteins have a negative result in the three analyses (SignalP, LipoP, TMHMM). Negative means No (SignalP), CYT (LipoP) and 0 (TMHMM PredHel). Use `nrow()` on the resulting selection to get the number of cases.  
+
+Next, find out how many are negative for **_all three_** analyses
+Hint: use (combination of) logical selections: `condition_A & condition_B`
+
+```{r}
+nrow(protein_data[protein_data$SignalP_YesNo == "N", ])
+nrow(protein_data[protein_data$LipoP_Localisation == "CYT", ])
+nrow(protein_data[protein_data$TMHMM_PredHel == 0, ])
+nrow(protein_data[protein_data$SignalP_YesNo == "N"
+                  & protein_data$LipoP_Localisation == "CYT"
+                  & protein_data$TMHMM_PredHel == 0, ])
+```
+
+
+#### Assignment 5
+
+Read the help page of the `summary()` function. Then, use this function and combine it with logical selection to find out what the mean, minimum and maximum values are of the LipoP score for the four different classes (CYT, SpI, SpII, TMH).
+Hint: select each subgroup in the dataframe using logical selection on the rows, and only the "LipoP_Score" of the columns 
+
+```{r}
+summary(protein_data[protein_data$LipoP_Localisation == "CYT", 16])
+summary(protein_data[protein_data$LipoP_Localisation == "SpI", 16])
+summary(protein_data[protein_data$LipoP_Localisation == "SpII", 16])
+summary(protein_data[protein_data$LipoP_Localisation == "TMH", 16])
+```
+
+#### Assignment 6
+
+Create a scatter plot of SignalP_Smax versus LipoP_Score and give it nice axis labels.
+
+```{r}
+plot(protein_data$SignalP_Smax, protein_data$LipoP_Score,
+     xlab = "SignalP_Smax", ylab = "LipoP_Score")
+```
+
+#### Assignment 7
+
+Study the help page of the `hist()` function.
+Create a histogram of the protein lengths.
+There are three large proteins that distort the image quite a lot.
+Try to exclude these and generate the histogram again, or try to use the `breaks` argument to get a better image.
+
+```{r}
+hist(protein_data$TMHMM_Length)
+hist(protein_data$TMHMM_Length, breaks = 30)
+```
 
 
