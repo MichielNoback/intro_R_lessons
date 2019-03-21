@@ -1,0 +1,644 @@
+---
+title: "A friendly intro of R"
+subtitle: "(as friendly as possible)"
+author: "Michiel Noback"
+output:
+  ioslides_presentation: default
+  beamer_presentation: default
+---
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+source("rmarkdown_knitr_header.R")
+```
+
+```{r echo = F}
+par(mar=c(4, 4, 0, 0))
+```
+
+## Contents
+
+- Lesson goals
+- Why R?
+- RStudio
+- R as a calculator
+- 
+
+# GOALS
+
+## Goals
+
+The objectives of these two lessons are  
+
+- demystify the concept of programming
+- show why programming can be better than Excel (or SPSS)
+- give you a friendly intro on programming with R
+
+# WHY R?
+
+## The analytical toolbox
+
+In the life sciences, many tools are used to perform data analysis and visualisation tasks.  
+
+The most obvious one is of course Excel, but you may have encountered a little bit of SPSS for more advanced statistics.  
+
+Another much-used tool is R.  
+
+## What is R?  
+
+According to Wikipedia, "R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing".
+
+## Why R?
+
+Besides its free nature, R is very popular because it  
+
+- has an interactive mode (read–evaluate–print loop: REPL)
+- makes repeating analyses (with new data) very easy
+- it supports "literate programming" so you can create presentations (such as this one!) and reports
+
+# RSTUDIO
+
+![](figures/RStudioLogo.png)
+
+## The workbench
+
+![](figures/RStudio_screen3.png)
+
+## Panels of the workbench
+
+You work with 4 panels in the workbench:
+
+1. **Code editor** where you write your scripts: text file with code you want to execute more than once
+2. **R console** where you execute lines of code one by one
+3. **Workspace and history** See what data you have in memory, and what you have done so far
+4. **Plots, Help & Files** ...
+
+
+## The console vs code editor
+
+- Use the console to do basic calculations, try pieces of code, develop a function, or load scripts (from the code editor) into memory.
+
+- Use the code editor to work on stored code - analyses you may want to repeat, or develop further. 
+
+- In the code editor, you can edit data files, programs (scripts), and analytical notebooks (RMarkdown)
+
+# USING THE CONSOLE
+
+## Let's calculate
+
+R, like any programming language, supports all math operations in the way you would expect them:  
+
+`+` &nbsp;&nbsp;&nbsp;&nbsp;is 'plus', as in 2 + 2 = 4  
+
+`-`&nbsp;&nbsp;&nbsp;&nbsp; ditto, subtract, as in 2 - 2 = 0  
+
+`*`&nbsp;&nbsp;&nbsp;&nbsp; multiply  
+
+`/`&nbsp;&nbsp;&nbsp;&nbsp; divide  
+
+`^`&nbsp;&nbsp;&nbsp;&nbsp; exponent (identical to: `**`)
+
+for the square root you can use $n^{0.5}$  
+
+use parentheses `()` for grouping parts of equations.
+
+## Precedence
+
+All "operators" adhere to the standard mathematrical **precedence** rules (PEMDAS):
+
+```
+    Parentheses (simplify inside these)
+    Exponents
+    Multiplication and Division (from left to right)
+    Addition and Subtraction (from left to right)
+```
+
+## --Practice 1--
+
+In the console, calculate the following:
+
+$31 + 11$  
+
+$66 - 24$  
+
+$\frac{126}{3}$  
+
+$12^2$   
+
+$\sqrt{256}$  
+
+$\frac{3*(4+\sqrt{8})}{5^3}$
+
+## Solutions
+
+$31 + 11 = 42$  
+
+$66 - 24 = 42$  
+
+$\frac{126}{3} = 42$  
+
+$12^2 = 144$   
+
+$\sqrt{256} = 16$  
+
+$\frac{3 * (4 + \sqrt{8})}{5^3} = 0.1638823$
+
+# DATA TYPES
+
+## Four types of data
+
+You have seen that R works with numbers. However, there are a few more types of data you need to know about:
+
+**numeric**:&nbsp; numbers with a decimal part: `3.123`, `5000.0`, `4.1E3`
+**integer**:&nbsp; numbers without a decimal part: `1`, `0`, `2999`  
+**logical**:&nbsp; `true` or `false`, also called boolean values  
+**character**:&nbsp; text, shoudl be put within quotes: `"hello R"`
+**factor**:&nbsp; nominal and ordinal scales (no example, yet)  
+
+**Note** If you type a number on the console, it will always be a `numeric` value regardless of whether you have a decimal part.   
+
+
+# FUNCTIONS
+
+## Definition
+
+Simple mathematics is not the core business of R.  
+
+You want to do more complex things and this is where functions come in.  
+
+**_A function is a piece of functionality that you can execute by typing its name, followed by a pair of parentheses. Within these parentheses, you can pass data for the function to work on. Functions often return a value but not always_**
+
+It has this general form:
+$$function\_name(argument, argument, ...)$$
+
+## Example: Square root with `sqrt()`
+
+You have already seen that the square root can be calculated as $n^{0.5}$.  
+
+However, there is also a function for it: `sqrt()`. It **_returns_** the square root of the given number, _e.g._ `sqrt(36)` 
+
+```{r}
+sqrt(36)
+36^0.5
+```
+
+## Another example: `paste()`  
+
+The `paste` function can take any number of arguments and returns them, combined into a single text. You can also supply a separator using `sep=<separator string>`:
+
+
+```{r}
+paste(1, 2, 3, sep="---")
+```
+
+Note the use of quotes with the three dashes: `"---"`; they indicate it is text data. 
+
+## Getting help on a function
+
+Type `?function_name` in the console to get help on a function.  
+For instance, typing `?sqrt` will give the help page of the square root function.  
+
+Scroll down in the help to see example usages of the function.
+
+## --Practice 2--
+
+1. View the help page for `paste`. There are two variants of this function.  
+    - Which? And what is the difference between them?
+    - Use both variants to generate exactly this message `"welcome to R"` from these arguments: `"welcome ", "to ", "R"`
+2. What does the `abs` function do?  
+    - What is returned by `abs(-20)` and what is `abs(20)`?  
+3. What does the `c` function do?  
+    - What is the difference in returned value of `c()` when you combine either `1`, `3` and `"a"` as arguments , or `1`, `2` and `3`? 
+
+
+# LOADING DATA
+
+## Protein analysis results
+
+The data we'll be working on is the combined result of batch analysis on a set of proteins annotated on the _Staphylococcus aureus_ genome.  
+
+They have been run through the sequence analysis tools `SignalP`, `LipoP` and `TMHMM`. 
+
+## How it looks in Excel
+
+![](figures/spreadsheet_signalP.png)
+
+## Export to simple text file
+
+After a bit of tweaking I have exported the data as a plain text file from Excel . The data is now in a _tab-delimited_ file called `protein_processing_pred.txt`. When you open it in a simple text editor (e.g. Notepad) it looks like this.
+
+![](figures/data_in_texteditor.png)
+
+## Loading into R using read.table()
+
+Here is how you load stuff in R - no mouse clicks!
+
+```{r loading_prot_data1}
+protein_data <- read.table(file = "data/protein_processing_pred.csv",
+                        header = TRUE,
+                        sep = ";",
+                        dec = ",",
+                        as.is = c(1, 2, 3, 21))
+```
+
+- `read.table` is the **_function_** you use to load data from file into memory. It takes a gazillion optional arguments.
+- the _key = value pairs_ between the parentheses (`file = "...", header=TRUE, ...`) are the **_arguments_**  that specify where the file is and how it is formatted.
+- "`protein_data <- `" assigns the data to a **_variable_** called `protein_data` so it can be used by that name.
+
+## Look at the column names
+
+```{r explore_prot_data_1}
+names(protein_data)
+```
+
+## Look at the first few entries (not nice)
+
+```{r explore_prot_data_2}
+head(protein_data)
+```
+
+## View like in Excel
+
+If you want to have a look at the data "spreadsheet-style", you can type `View(prot_data)` in the Console. The Viewer will show the data associated with the variable in the editor panel.
+
+![](figures/data_in_viewer.png)
+
+
+# VARIABLES
+
+## What are variables?
+
+- In math, you often use variables to label or name pieces of data
+- E.g., `x = 42` is used to define a variable `x`, with a value of `42`. 
+- In programming, this is essentially the same. 
+- Variables are really _variable_ - their value can change!
+- In R you can define a variable using "`<-`", so `x <- 42` is equivalent to `x = 42`
+
+
+## --Practice 3--
+
+Create three variables with the given values - x:20, y:10 and z:3. Next, calculate the following with these variables:  
+
+1. $x+y$
+2. $x^z$
+3. $q = x \times y \times z$
+4. $\sqrt{q}$
+5. $\frac{q}{\pi}$ (R has this value - what name will it have?)
+6. $\log_{10}{(x \times y)}$
+
+
+## The function `c()`
+
+This is one of the most-used functions in R. It generates a _**vector**_ from the passed arguments. The datatype of the vector is the one that fits the arguments best:
+
+```{r function_c_1}
+c(1, "a", TRUE)
+c(1, TRUE, FALSE)
+c(1, 2, 5)
+```
+
+# VECTORS AND INDEXING
+
+## Vectors and Indexing
+
+- In R, all data lives inside _**vectors**_.
+- A vector is a series of elements maintained as a single unit.
+- Individual elements are accessed using their _**index**_: a number between square brackets: `[]`
+
+```{r indexing_1, collapse=TRUE}
+nucleotides <- c("A", "C", "G", "T")
+nucleotides
+nucleotides[3]    # fetch the third
+nucleotides[2]    # the second
+```
+
+Note the use of `#` to put text within code: this is _code comment_ and is ignored by R.
+
+
+## More on indexing
+
+- When selecting with a vector, you can use any order and combination of numbers to select elements from a vector.
+
+```{r indexing_2}
+nucleotides[c(3,1,4)]
+```
+
+or use a series of indices, e.g. 1 through 3
+
+```{r}
+nucleotides[1:3] 
+```
+
+## --Practice 4--
+
+Given the letters of the alphabet, available as the variable `letters` in R, make a **_single_** selection that gives you this output:
+
+1. "b"
+2. "z"
+3. "c" "d" "e" "f"
+4. "h" "e" "l" "l" "o"
+5. "hello" (Combine what you have already seen for this one! Look at the help for `paste` and use `collapse`): 
+
+## Indexing on conditions
+
+One of the nice things about indexing is that you can use _**logical expressions**_ to select elements you are interested in.  
+This is usually the result of some logical test:
+
+```{r indexing_3}
+q <- c(2, 1, 4)
+q > 2
+q[q > 2]
+```
+
+
+----
+
+```{r indexing_4}
+q
+```
+
+```{r indexing_5, collapse=TRUE}
+q == 1
+q[q == 1]
+```
+
+```{r indexing_6, collapse=TRUE}
+q <= 3
+q[q <= 3]
+```
+
+```{r indexing_7, collapse=TRUE}
+q == 1 | q == 4 # using logical "OR"
+q[q == 1 | q == 4]
+```
+
+## Overview logical operators
+
+- Compare  
+    - `>` (*greater then*)
+    - `>=` (*greater then or equal*) 
+    - `<` (*less then*) 
+    - `<=` (*less then or equal*) 
+    - `==` (*equal*) 
+- Combine  
+    - `&` (**AND**)
+    - `|` (**OR**)  
+- Negate  
+    - `!` (**NOT**)
+
+
+----
+
+I will use a _named vector_ to demonstrate further:
+
+```{r indexing_8}
+grades <- c(3.4, 5.6, 8.3, 2.9, 6.8)
+# Attach names to the vector for readable display
+names(grades) <- c("Ian", "Mark", "Lara", "Rowan", "Iris")
+grades
+```
+
+----
+
+```{r indexing_9}
+grades[grades >= 5.5]              # passing grades
+grades[grades == max(grades)]      # highest grade
+grades[grades >= 5.5 & grades < 7] # average students
+```
+
+## --Practice 5 (intro)--
+
+Given these vectors, representing a hypothetical controlled drug test experiment:  
+
+```{r indexing_10}
+participant_ids <- c("P01", "P02", "P03", "P04", "P05", "P06")
+placebo_given <- c(FALSE, TRUE, TRUE, FALSE, TRUE, FALSE)
+names(placebo_given) <- participant_ids
+patient_responses <- c(76, 44, 38, 92, 28, 81)
+names(patient_responses) <- participant_ids
+placebo_given
+patient_responses
+```
+
+## --Practice 5--
+
+Using _only_ logical selections, select
+
+1. only those participant_ids for which a placebo was given
+2. only those participant_ids for which NO placebo was given
+3. the responses for which a placebo was given
+4. the responses for which a placebo was given and calculate the mean of this group (using `mean()`)
+5. the patient responses with a response higher than the mean of all responses
+6. the highest value (using `max()`) of the patients who were given a placebo
+
+# DATAFRAMES
+
+## What is a dataframe
+
+- The dataset `protein_data` is what is called a _**dataframe**_ in R. Data is organized in rows and columns.
+- Columns contain _measurements_ of a single variable; they are formed bij vectors.
+- Rows contain _observations_ (here: different measurements on a protein). 
+- Here are some ways to explore this dataframe.
+
+## Accessing a column of a dataframe
+
+- Use the dollar sign `$` to get hold of a single column, a vector of values for a single variable
+- Here is a summary of column "SignalP_YesNo", showing that 134 out of 387 proteins have a putative signal sequence:
+
+```{r df_selection_1}
+table(protein_data$SignalP_YesNo)
+```
+
+You can also use indexing on the column-vector:
+```{r df_selection_2}
+protein_data$SignalP_YesNo[330:345]
+```
+
+
+## The number of rows and columns
+
+Get the dimensions of the dataset:
+
+```{r df_selection_3}
+dim(protein_data)
+```
+
+This is a vector of two integers. Which one is the number of rows?
+
+## Indexing on dataframes
+
+- Indexing on dataframes is like using a coordinate system: `dataframe[row(s), column(s)]`
+- Use any combination of coordinates, and leave empty if you want all values of the row or column
+- The next few slides use this example dataframe called `students` for simplicity
+
+```{r df_selection_4, echo=FALSE}
+students <- data.frame(sid=paste0("S0", 1:5), 
+                       name=c("Mark", "Lynn", "Lianne", "Peter", "Rose"),
+                       sex=factor(c("m", "f", "f", "m", "f"), labels = c("female", "male")),
+                       biology=c(5.6, 6.2, 7.9, 4.4, 9.1),
+                       statistics=c(6.1, 5.1, 8.0, 4.7, 7.3),
+                       informatics=c(6.3, 6.1, 7.7, 5.4, 9.5),
+                       stringsAsFactors = F)
+students
+```
+
+## Indexing on dataframes (2)
+
+Using regular indexing 
+```{r df_selection_5}
+students[1, 2] # row 1, second value
+students[2, 4:6] # all grades of Lynn
+students[, 2] # all student names; same as students$name
+```
+
+## Indexing on dataframes (3)
+
+Using logical selections
+
+```{r df_selection_6}
+students[students$name == "Lynn", 4:6] 
+students[students$sex == "female", ] # all grades for girls
+```
+
+## --Practice 6--
+
+To get the student data into your session, type `source("https://git.io/fh7UL")` in the console.
+It is this file: 
+[https://raw.githubusercontent.com/MichielNoback/R_data_analysis_and_visualization/master/presentations/data/intro_lesson_data.R](https://raw.githubusercontent.com/MichielNoback/R_data_analysis_and_visualization/master/presentations/data/intro_lesson_data.R)
+
+Type `students` in the console to verify you have it
+
+1. select all `informatics` grades
+2. select the third and fourth row entirely
+3. select the `statistics` grade for Peter
+4. select the biology and statistics grades for the female students
+5. select the student names where the biology grade is below 6
+
+## --Practice 6 Solutions--
+
+1: select all `informatics` grades: two alternatives
+
+```{r practice_sol_6_1}
+students$informatics
+students[, 5]
+```
+
+----
+
+2: select the third and fourth row entirely: two alternatives
+
+```{r practice_sol_6_2}
+students[2:3, ]
+students[c(2, 3), ]
+```
+
+----
+
+3: select the `statistics` grade for Peter: three alternatives
+
+```{r practice_sol_6_3}
+students[4, 5] # simple
+students$statistics[4] # also OK
+students[students$name == "Peter", 5] # better
+```
+
+----
+
+4: select the biology and statistics grades for the female students
+
+```{r practice_sol_6_4}
+students[students$sex == "female", c(4, 5)]
+```
+
+5: select the student names where the biology grade is below 6
+
+```{r practice_sol_6_5}
+students[students$biology < 6, 2]
+```
+
+# CREATING FIGURES
+
+## Loading the data yourself.
+
+If you want to tag along, download and load the file as follows:
+
+```{r figure_demo_1, eval=FALSE}
+#setwd("~")
+#download.file(url = "https://git.io/fjfum",
+#              destfile = "protein_data.csv")
+protein_data <- read.table(file = "https://git.io/fjfum",
+                        header = TRUE,
+                        sep = ";",
+                        dec = ",",
+                        as.is = c(1, 2, 3, 21))
+```
+
+(if the short URL does not work, use "raw.githubusercontent.com/MichielNoback/
+R_data_analysis_and_visualization/master/presentations/
+data/protein_processing_pred.txt)"
+
+
+## A scatterplot
+
+Let's investigate the relation Cmax vs Ymax of the SignalP analysis:
+
+```{r figure_demo_2, fig.width=5.5, fig.height=3.6}
+cmax <- protein_data$SignalP_Cmax; ymax <- protein_data$SignalP_Ymax
+plot(x = cmax, y = ymax)
+```
+
+----
+
+That didn't look pretty. Let's tweak a little:
+
+```{r figure_demo_3, fig.width=6, fig.height=4}
+plot(x = cmax, y = ymax,
+     xlab = "Cmax value", ylab="Ymax value",
+     pch=19, cex = 0.8, col=rgb(0, 0, 1, 0.3))
+```
+
+----
+
+Or, even better, with a log transform:
+
+```{r figure_demo_4, fig.width=6, fig.height=4}
+plot(x = log2(cmax), y = log2(ymax),
+     xlab = "log2(Cmax value)", ylab="log2(Ymax value)",
+     pch=19, cex = 0.8, col=rgb(0, 0, 1, 0.3))
+```
+
+---- 
+
+Let's add a regression line
+
+```{r figure_demo_5, fig.width=6, fig.height=3.5}
+plot(x = log2(cmax), y = log2(ymax),
+     xlab = "log2(Cmax value)", ylab="log2(Ymax value)",
+     pch=19, cex = 0.8, col=rgb(0, 0, 1, 0.3))
+model <- lm(log2(ymax)  ~  log2(cmax))
+abline(model, col = "red", lwd=2)
+```
+
+---- 
+
+Or with a smoother?
+
+```{r figure_demo_6, fig.width=6, fig.height=4}
+scatter.smooth(x = log2(cmax), y = log2(ymax),
+     xlab = "log2(Cmax value)", ylab="log2(Ymax value)",
+     pch=19, cex = 0.8, col=rgb(0, 0, 1, 0.3))
+abline(model, col = "red", lwd=2)
+```
+
+# FINAL ASSIGNMENT
+
+## Final assignment
+
+You have to solve a series of questions/assignments. Download the assignment RMarkdown document from this location:
+
+**\<\<PUT LINK HERE\>\>**
+
+Open the file in RStudio and deal with the assignments. Put your solutions where it says ## YOUR CODE HERE.
+
+You can process the document into Word form by klicking "Knit"
+Submit this Word document.
+

@@ -1,0 +1,77 @@
+---
+title: "Final Assignment R lessons"
+author: "YOUR NAME HERE"
+date: "3/20/2019"
+output:
+  html_document:
+    df_print: paged
+---
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+This will include both the code and its result into the created document.  
+Clicking the tiny green arrow in the top right corner of the chunk will execute only that chunk, within RStudio.
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure}
+plot(pressure)
+```
+
+## Load the data
+
+Run this chunk to download the data and load it into your R session.
+
+```{r}
+protein_data <- read.table(file = "https://git.io/fjfum",
+                        header = TRUE,
+                        sep = ";",
+                        dec = ",",
+                        as.is = c(1, 2, 3, 21))
+```
+
+## The assignments 
+
+#### Assignment 1
+
+You have seen the function `table()` which can be used to create a frequency table. Apply this function to generate a table for the different localizations as identified by LipoP.
+
+```{r}
+table(protein_data$LipoP_Localisation)
+```
+
+#### Assignment 2
+
+Use `table()` again, this time to create a "contingency table" (cross tabulation) for LipoP localization agains SignalP predictions (Yes/No). Is there a (cor)relation between these analyses?
+
+```{r}
+table(protein_data$LipoP_Localisation, protein_data$SignalP_YesNo)
+```
+
+#### Assignment 2
+
+First run the chunk below to get a new column for the TMHMM analysis, giving a simplified version of column `TMHMM_PredHel`. If the number of transmembrane helices is bigger then 1, it is reduced to "2+"
+
+```{r}
+protein_data$TMHMM_PredHelSimple <- protein_data$TMHMM_PredHel
+protein_data$TMHMM_PredHelSimple <- ifelse(protein_data$TMHMM_PredHel > 1, "2+", protein_data$TMHMM_PredHel)
+#protein_data$TMHMM_PredHelSimple 
+```
+
+Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses?
+
+```{r}
+table(protein_data$SignalP_YesNo, protein_data$TMHMM_PredHelSimple)
+```
+
+
