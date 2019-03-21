@@ -7,6 +7,11 @@ output:
     df_print: paged
 ---
 
+## Introduction
+
+This is the final assignment of the intro lessons on R.
+You should work within this document, and "Knit" it into a Word document when you are finished. Submit the resulting Word document as well as this .Rmd document on Blackboard.
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
@@ -123,5 +128,7 @@ Try to exclude these and generate the histogram again, or try to use the `breaks
 hist(protein_data$TMHMM_Length)
 hist(protein_data$TMHMM_Length, breaks = 30)
 ```
+
+## The end
 
 
