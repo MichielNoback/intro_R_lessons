@@ -501,9 +501,9 @@ students[students$sex == "female", ] # all grades for girls
 
 ## --Practice 6--
 
-To get the student data into your session, type `source("https://git.io/fh7UL")` in the console.
+To get the student data into your session, type `source("https://git.io/fjfMW")` in the console.
 It is this file: 
-[https://raw.githubusercontent.com/MichielNoback/R_data_analysis_and_visualization/master/presentations/data/intro_lesson_data.R](https://raw.githubusercontent.com/MichielNoback/R_data_analysis_and_visualization/master/presentations/data/intro_lesson_data.R)
+[https://raw.githubusercontent.com/MichielNoback/intro_R_lessons/gh-pages/data/intro_lesson_data.R](https://raw.githubusercontent.com/MichielNoback/intro_R_lessons/gh-pages/data/intro_lesson_data.R)
 
 Type `students` in the console to verify you have it
 
@@ -562,9 +562,6 @@ students[students$biology < 6, 2]
 If you want to tag along, download and load the file as follows:
 
 ```{r figure_demo_1, eval=FALSE}
-#setwd("~")
-#download.file(url = "https://git.io/fjfum",
-#              destfile = "protein_data.csv")
 protein_data <- read.table(file = "https://git.io/fjfum",
                         header = TRUE,
                         sep = ";",
@@ -572,9 +569,8 @@ protein_data <- read.table(file = "https://git.io/fjfum",
                         as.is = c(1, 2, 3, 21))
 ```
 
-(if the short URL does not work, use "raw.githubusercontent.com/MichielNoback/
-R_data_analysis_and_visualization/master/presentations/
-data/protein_processing_pred.txt)"
+(if the short URL does not work, use  
+"https://raw.githubusercontent.com/MichielNoback/intro_R_lessons/gh-pages/data/protein_processing_pred.csv")
 
 
 ## A scatterplot

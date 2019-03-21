@@ -33,7 +33,7 @@ plot(pressure)
 Run this chunk to download the data and load it into your R session.
 
 ```{r}
-protein_data <- read.table(file = "https://git.io/fjfum",
+protein_data <- read.table(file = "https://git.io/fjfMC",
                         header = TRUE,
                         sep = ";",
                         dec = ",",
@@ -68,10 +68,11 @@ protein_data$TMHMM_PredHelSimple <- ifelse(protein_data$TMHMM_PredHel > 1, "2+",
 #protein_data$TMHMM_PredHelSimple 
 ```
 
-Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses?
+Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses? What does this say?
 
 ```{r}
 table(protein_data$SignalP_YesNo, protein_data$TMHMM_PredHelSimple)
 ```
+
 
 
