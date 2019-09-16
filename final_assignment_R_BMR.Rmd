@@ -1,7 +1,7 @@
 ---
 title: "Final Assignment R lessons"
 author: "YOUR NAME HERE"
-date: "3/20/2019"
+date: "THE/DATE/HERE"
 output:
   html_document:
     df_print: paged
@@ -23,7 +23,7 @@ summary(cars)
 ```
 
 This will include both the code and its result into the created document.  
-Clicking the tiny green arrow in the top right corner of the chunk will execute only that chunk, within RStudio.
+Clicking the tiny green arrow in the top right corner of a code chunk will execute only that chunk, within RStudio.
 
 ## Including Plots
 
@@ -52,7 +52,7 @@ protein_data <- read.table(file = "https://git.io/fjfMC",
 You have seen the function `table()` which can be used to create a frequency table. Apply this function to generate a table for the different localizations as identified by LipoP.
 
 ```{r}
-table(protein_data$LipoP_Localisation)
+## YOUR CODE HERE
 ```
 
 #### Assignment 2
@@ -60,7 +60,7 @@ table(protein_data$LipoP_Localisation)
 Use `table()` again, this time to create a "contingency table" (cross tabulation) for LipoP localization agains SignalP predictions (Yes/No). Is there a (cor)relation between these analyses?
 
 ```{r}
-table(protein_data$LipoP_Localisation, protein_data$SignalP_YesNo)
+## YOUR CODE HERE
 ```
 
 #### Assignment 3
@@ -75,7 +75,7 @@ protein_data$TMHMM_PredHelSimple <- ifelse(protein_data$TMHMM_PredHel > 1, "2+",
 Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses? What does this say?
 
 ```{r}
-table(protein_data$SignalP_YesNo, protein_data$TMHMM_PredHelSimple)
+## YOUR CODE HERE
 ```
 
 
@@ -87,25 +87,17 @@ Next, find out how many are negative for **_all three_** analyses
 Hint: use (combination of) logical selections: `condition_A & condition_B`
 
 ```{r}
-nrow(protein_data[protein_data$SignalP_YesNo == "N", ])
-nrow(protein_data[protein_data$LipoP_Localisation == "CYT", ])
-nrow(protein_data[protein_data$TMHMM_PredHel == 0, ])
-nrow(protein_data[protein_data$SignalP_YesNo == "N"
-                  & protein_data$LipoP_Localisation == "CYT"
-                  & protein_data$TMHMM_PredHel == 0, ])
+## YOUR CODE HERE
 ```
 
 
 #### Assignment 5
 
-Read the help page of the `summary()` function. Then, use this function and combine it with logical selection to find out what the mean, minimum and maximum values are of the LipoP score for the four different classes (CYT, SpI, SpII, TMH).
-Hint: select each subgroup in the dataframe using logical selection on the rows, and only the "LipoP_Score" of the columns 
+Read the help page of the `summary()` function. Then, use this function and combine it with logical selection to find out what the mean, minimum and maximum values are of the LipoP score for the four different protein classes (CYT, SpI, SpII, TMH).
+Hint: select each subgroup in the dataframe using logical selection on the rows, and only the "LipoP_Score"  column 
 
 ```{r}
-summary(protein_data[protein_data$LipoP_Localisation == "CYT", 16])
-summary(protein_data[protein_data$LipoP_Localisation == "SpI", 16])
-summary(protein_data[protein_data$LipoP_Localisation == "SpII", 16])
-summary(protein_data[protein_data$LipoP_Localisation == "TMH", 16])
+## YOUR CODE HERE
 ```
 
 #### Assignment 6
@@ -113,8 +105,7 @@ summary(protein_data[protein_data$LipoP_Localisation == "TMH", 16])
 Create a scatter plot of SignalP_Smax versus LipoP_Score and give it nice axis labels.
 
 ```{r}
-plot(protein_data$SignalP_Smax, protein_data$LipoP_Score,
-     xlab = "SignalP_Smax", ylab = "LipoP_Score")
+## YOUR CODE HERE
 ```
 
 #### Assignment 7
@@ -125,8 +116,7 @@ There are three large proteins that distort the image quite a lot.
 Try to exclude these and generate the histogram again, or try to use the `breaks` argument to get a better image.
 
 ```{r}
-hist(protein_data$TMHMM_Length)
-hist(protein_data$TMHMM_Length, breaks = 30)
+## YOUR CODE HERE
 ```
 
 ## The end
