@@ -72,7 +72,9 @@ protein_data$TMHMM_PredHelSimple <- protein_data$TMHMM_PredHel
 protein_data$TMHMM_PredHelSimple <- ifelse(protein_data$TMHMM_PredHel > 1, "2+", protein_data$TMHMM_PredHel)
 ```
 
-Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses? What does this say?
+Have a look at this new column.
+
+Next, create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses? What does this say?
 
 ```{r}
 ## YOUR CODE HERE
@@ -81,7 +83,7 @@ Now create a "contingency table" for SignalP against TMHMM_PredHelSimple predict
 
 #### Assignment 4
 
-Find out how many proteins have a negative result in the three analyses (SignalP, LipoP, TMHMM). Negative means No (SignalP), CYT (LipoP) and 0 (TMHMM PredHel). Use `nrow()` on the resulting selection to get the number of cases.  
+Find out how many proteins have a negative result in the three analyses (SignalP, LipoP, TMHMM). Negative means N (SignalP), CYT (LipoP) and 0 (TMHMM PredHel). Use `nrow()` on the resulting selection to get the number of cases.  
 
 Next, find out how many are negative for **_all three_** analyses
 Hint: use (combination of) logical selections: `condition_A & condition_B`

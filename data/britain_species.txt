@@ -1,4 +1,4 @@
-island;area;elevation;soil.types;latitude;dis.from.britain;num-species
+island;area;elevation;soil.types;latitude;distance.from.britain;number.of.species
 Ailsa;0.8;340;1;55.3;14.0;75
 Anglesey;712.5;127;3;53.3;0.2;855
 Arran;429.4;874;4;55.6;5.2;577
