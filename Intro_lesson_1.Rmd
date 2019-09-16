@@ -720,9 +720,11 @@ What is expected of you at the test of this course:
 You should be be able to  
 
 - perform basic mathematic operations
-- apply selections on vectors
+- apply selections on vectors and dataframes
 - read documentation for a function
 - use existing functions correctly
+
+You will be allowed to use all R documentation as well as this presentation.
 
 # FINAL ASSIGNMENT
 
