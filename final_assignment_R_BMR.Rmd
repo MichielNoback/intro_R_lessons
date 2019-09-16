@@ -12,6 +12,11 @@ output:
 This is the final assignment of the intro lessons on R.
 You should work within this document, and "Knit" it into a Word document when you are finished. Submit the resulting Word document as well as this .Rmd document on Blackboard.
 
+The presentation is available here:
+[https://michielnoback.github.io/intro_R_lessons/Intro_lesson_1.html](https://michielnoback.github.io/intro_R_lessons/Intro_lesson_1.html)
+
+and as flat html as well:
+[https://michielnoback.github.io/intro_R_lessons/Intro_lesson_simple.html](https://michielnoback.github.io/intro_R_lessons/Intro_lesson_simple.html)
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
