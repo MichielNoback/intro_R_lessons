@@ -595,7 +595,7 @@ Type `students` or `View(students)` in the console to verify you have it
 
 ```{r practice_sol_6_1}
 students$informatics
-students[, 5]
+students[, 6]
 ```
 
 ----
@@ -612,8 +612,8 @@ students[c(2, 3), ]
 3: select the `statistics` grade for Peter: three alternatives
 
 ```{r practice_sol_6_3}
-students[4, 5] # simple
-students$statistics[4] # also OK
+students[4, 5] # simple but not really the intention
+students$statistics[4] # idem
 students[students$name == "Peter", 5] # better
 ```
 
