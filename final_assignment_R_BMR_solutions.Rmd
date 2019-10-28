@@ -1,0 +1,162 @@
+---
+title: "Final Assignment R lessons"
+author: "YOUR NAME HERE"
+date: "THE/DATE/HERE"
+output:
+  html_document:
+    df_print: paged
+---
+
+## Introduction
+
+This is the final assignment of the intro lessons on R.
+You should work within this document, and "Knit" it into a Word document when you are finished. Submit the resulting Word document as well as this .Rmd document on Blackboard.
+
+The presentation is available here:
+[https://michielnoback.github.io/intro_R_lessons/Intro_lesson_1.html](https://michielnoback.github.io/intro_R_lessons/Intro_lesson_1.html)
+
+and as flat html as well:
+[https://michielnoback.github.io/intro_R_lessons/Intro_lesson_simple.html](https://michielnoback.github.io/intro_R_lessons/Intro_lesson_simple.html)
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+This will include both the code and its result into the created document.  
+Clicking the tiny green arrow in the top right corner of a code chunk will execute only that chunk, within RStudio.
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure}
+plot(pressure)
+```
+
+## Load the data
+
+Run this chunk to download the data and load it into your R session.
+
+```{r}
+protein_data <- read.table(file = "https://git.io/fjfMC",
+                        header = TRUE,
+                        sep = ";",
+                        dec = ",",
+                        as.is = c(1, 2, 3, 21))
+```
+
+## The assignments 
+
+#### Assignment 1
+
+You have seen the function `table()` which can be used to create a frequency table. Apply this function to generate a table for the different localizations as identified by LipoP.
+
+```{r}
+table(protein_data$LipoP_Localisation)
+##OR
+table(protein_data[, 15])
+```
+
+#### Assignment 2
+
+Use `table()` again, this time to create a "contingency table" (cross tabulation) for LipoP localization agains SignalP predictions (Yes/No). Is there a (cor)relation between these analyses?
+
+```{r}
+table(protein_data$LipoP_Localisation, protein_data$SignalP_YesNo)
+```
+
+#### Assignment 3
+
+First run the chunk below to get a new column for the TMHMM analysis, giving a simplified version of column `TMHMM_PredHel`. If the number of transmembrane helices is bigger then 1, it is reduced to "2+"
+
+```{r}
+protein_data$TMHMM_PredHelSimple <- protein_data$TMHMM_PredHel
+protein_data$TMHMM_PredHelSimple <- ifelse(protein_data$TMHMM_PredHel > 1, "2+", protein_data$TMHMM_PredHel)
+```
+
+Have a look at this new column.
+
+Next, create a "contingency table" for SignalP against TMHMM_PredHelSimple predictions. Is there a (cor)relation between these analyses? What does this say?
+
+```{r}
+table(protein_data$SignalP_YesNo, protein_data$TMHMM_PredHelSimple)
+```
+
+
+#### Assignment 4
+
+Find out how many proteins have a negative result in the three analyses (SignalP, LipoP, TMHMM). Negative means N (SignalP), CYT (LipoP) and 0 (TMHMM PredHel). Use `nrow()` on the resulting selection to get the number of cases.  
+
+Next, find out how many are negative for **_all three_** analyses
+Hint: use (combination of) logical selections: `condition_A & condition_B`
+
+```{r results='hold'}
+nrow(protein_data[protein_data$SignalP_YesNo == "N", ])
+nrow(protein_data[protein_data$LipoP_Localisation == "CYT", ])
+nrow(protein_data[protein_data$TMHMM_PredHel == 0, ])
+
+nrow(protein_data[protein_data$SignalP_YesNo == "N" 
+                  & protein_data$LipoP_Localisation == "CYT" 
+                  & protein_data$TMHMM_PredHel == 0, ])
+```
+
+```{r results='hold'}
+### ALTERNATIVE SOLUTION USING TRUE EQUALS 1 AND FALSE EQUALS 0
+sum(protein_data$SignalP_YesNo == "N")
+sum(protein_data$LipoP_Localisation == "CYT")
+sum(protein_data$TMHMM_PredHel == 0)
+
+sum(protein_data$SignalP_YesNo == "N" 
+                  & protein_data$LipoP_Localisation == "CYT" 
+                  & protein_data$TMHMM_PredHel == 0)
+```
+
+
+#### Assignment 5
+
+Read the help page of the `summary()` function. Then, use this function and combine it with logical selection to find out what the mean, minimum and maximum values are of the LipoP score for the four different protein classes (CYT, SpI, SpII, TMH).
+Hint: select each subgroup in the dataframe using logical selection on the rows, and only the "LipoP_Score"  column 
+
+```{r results='hold'}
+summary(protein_data$LipoP_Score[protein_data$LipoP_Localisation == "CYT"])
+summary(protein_data$LipoP_Score[protein_data$LipoP_Localisation == "SpI"])
+summary(protein_data$LipoP_Score[protein_data$LipoP_Localisation == "SpII"])
+summary(protein_data$LipoP_Score[protein_data$LipoP_Localisation == "TMH"])
+```
+
+#### Assignment 6
+
+Create a scatter plot of SignalP_Smax versus LipoP_Score and give it nice axis labels.
+
+```{r}
+plot(protein_data$SignalP_Smax, protein_data$LipoP_Score, 
+     xlab="SignalP Smax score", ylab="LipoP score")
+```
+
+#### Assignment 7
+
+Study the help page of the `hist()` function.
+Create a histogram of the protein lengths.
+There are three large proteins that distort the image quite a lot.
+Try to exclude these and generate the histogram again, or try to use the `breaks` argument to get a better image.
+
+```{r}
+#All
+hist(protein_data$TMHMM_Length)
+#Exclude proteins over 1000 residues
+shorter_prots <- protein_data$TMHMM_Length[protein_data$TMHMM_Length < 1000]
+hist(shorter_prots)
+#CHALLENGE: set the breaks attribute
+hist(protein_data$TMHMM_Length, breaks=c(0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 10000))
+#BETTER:
+hist(protein_data$TMHMM_Length, breaks=c(seq(from = 0, to = 1000, by = 100), 10000))
+```
+
+## The end
+
+
