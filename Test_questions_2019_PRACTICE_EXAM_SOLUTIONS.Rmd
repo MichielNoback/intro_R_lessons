@@ -1,0 +1,81 @@
+---
+title: "Test Questions Practice exam"
+author: "Michiel Noback"
+date: "9/17/2019"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load the data
+
+You are going to analyse a dataset that describes some properties of a variety of food constituents. In the column header, `carb` stands for carbohydrate, `fat.sat` for saturated fats, and `fat.unsat` for unsaturated fats.
+
+By running the chunk below, load the data.
+
+```{r}
+##KEEPIT##
+foods_file <- "https://raw.githubusercontent.com/MichielNoback/R_data_analysis_and_visualization/master/exercises/data/food_constituents.txt"
+foods <- read.table(foods_file, header = TRUE)
+head(foods)
+```
+
+## Analyse!
+
+Solve the assignments by filling in your solutions where it says **`##YOUR CODE HERE`**
+When you're done, Knit the document into Word and submit that with the rest of your test results.
+
+**Question R-1 (2 points)**  
+
+Show the data from columns one, five and six, rows 8-11.
+
+```{r}
+foods[8:11, c(1, 5, 6)]
+```
+
+**Question R-2 (2 points)**  
+
+Show the Type, kcal and total fat for the food with the highest total fat content.
+
+```{r}
+foods[foods$fat.total == max(foods$fat.total), c(2, 3, 8)]
+```
+
+**Question R-3 (4 points)**  
+
+Given the dataframes in the chunk below, study the documentation of the `merge()` function. Next, merge the two dataframes without any data loss.
+
+```{r}
+##KEEPIT##
+students1 <- data.frame(
+    name = c("Mark", "Emily", "John"),
+    biology = c(4.5, 6.2, 8.1),
+    chemistry = c(6.1, 7.2, 9.3)
+) 
+students2 <- data.frame(
+    first_name = c("Emily", "John", "Peter"),
+    statistics = c(3.8, 6.6, 6.8)
+)
+students1
+students2
+```
+
+```{r}
+merge(students1, students2, by.x = "name", by.y = "first_name", all = TRUE)
+```
+
+
+**Question R-4 (4 points)**  
+
+Create a scatterplot showing the relationship between `kcal` and `carb.total`. Make sure you have correct axis labels. Think about which one you put on the x-axis!
+
+```{r}
+#We do not know the units so they are left out
+plot(foods$carb.total, foods$kcal, xlab="Total Carbohydrate", ylab = "Calories (kcal)")
+```
+
