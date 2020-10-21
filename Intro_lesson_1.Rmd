@@ -1,8 +1,9 @@
 ---
 title: "A friendly intro of R"
-subtitle: "(as friendly as possible)"
 author: "Michiel Noback"
+subtitle: (as friendly as possible)
 output:
+  slidy_presentation: default
   ioslides_presentation: default
   beamer_presentation: default
 ---
@@ -21,7 +22,11 @@ par(mar=c(4, 4, 0, 0))
 - Why R?
 - RStudio
 - R as a calculator
-- 
+- Data types
+- Functions 
+- Variables
+- Vectors & Indexing
+- Dataframes
 
 # GOALS
 
@@ -33,7 +38,8 @@ The objectives of these two lessons are
 - show why programming can be better than Excel (or SPSS)
 - give you a friendly intro on programming with R
 
-# WHY R?
+# Why R?  
+
 
 ## The analytical toolbox
 
@@ -51,7 +57,7 @@ Besides its free nature, R is very popular because it
 - makes repeating analyses (with new data) very easy
 - supports "literate programming" for creating presentations (such as this one!) and reports
 
-# RSTUDIO
+## RSTUDIO
 
 ![](figures/RStudioLogo.png)
 
@@ -92,7 +98,7 @@ R, like any programming language, supports all math operations in the way you wo
 
 `/`&nbsp;&nbsp;&nbsp;&nbsp; divide  
 
-`^`&nbsp;&nbsp;&nbsp;&nbsp; exponent (identical to: `**`)
+`^`&nbsp;&nbsp;&nbsp;&nbsp; exponent
 
 Remember that $\sqrt{n} = n^{0.5}$  
 
@@ -153,23 +159,23 @@ You have seen that R works with numbers. There are a few more types of data:
     - `true` or `false`  
 **character**:&nbsp; text, always between quotes:  
     - `"hello R"` or `"GATC"`  
-**factor**:&nbsp; nominal and ordinal scales (visited later)  
-
-**Note** When you type a number in the console it will always be `numeric` if it is without decimal part.   
+**factor**:&nbsp; nominal and ordinal scales (_not dealt with here_)  
 
 
-# FUNCTIONS
+# FUNCTIONS  
 
 ## Definition
 
-Simple mathematics is not the core business of R.  
+Simple calculations is not the core business of R.  
 
 You want to do more complex things and this is where functions come in.  
 
 **_A function is a named piece of functionality that you can execute by typing its name, followed by a pair of parentheses. Within these parentheses, you can pass data for the function to work on. Functions may or may not return a value_**
 
 It has this general form:
+
 $$function\_name(argument, argument, ...)$$
+
 
 ## Example: Square root with `sqrt()`
 
@@ -218,7 +224,7 @@ Scroll down in the help page to see example usages of the function.
 - Variables are used to name and reuse pieces of data
 - E.g., `x <- 42` is used to create a variable `x` with a value of `42`. 
 - Variables are really _variable_ - their value can change!
-- You define a variable using `<-` in R, so `x <- 42` is the same as `x = 42`
+- You define a variable using `<-` in R, so "`x <- 42`" is the same as "`x = 42`"
 - The next chunk creates a variable called dna and then uses it in `paste()`:
 
 ```{r first_variable}
@@ -426,7 +432,7 @@ protein_data <- read.table(file = "data/protein_processing_pred.csv",
                         as.is = c(1, 2, 3, 21)) 
 ```
 
-Don't worry - you do not need to do this for the test. The next slide explains what happens.
+Don't worry - you do not need to be able to do this for the test. The next slide explains what happens.
 
 -----
 
@@ -697,15 +703,6 @@ plot(x = log2(cmax), y = log2(ymax),
      xlab = "log2(Cmax value)", ylab="log2(Ymax value)",
      pch=19, cex = 0.8, col=rgb(0, 0, 1, 0.3))
 model <- lm(log2(ymax)  ~  log2(cmax))
-abline(model, col = "red", lwd=2)
-```
-
-## Or with a smoother?
-
-```{r figure_demo_6, fig.width=6, fig.height=4}
-scatter.smooth(x = log2(cmax), y = log2(ymax),
-     xlab = "log2(Cmax value)", ylab="log2(Ymax value)",
-     pch=19, cex = 0.8, col=rgb(0, 0, 1, 0.3))
 abline(model, col = "red", lwd=2)
 ```
 
