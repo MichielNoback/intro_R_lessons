@@ -1,0 +1,8 @@
+1. Install R
+2. Install RStudio
+3. Install a Latex version (if you want to create pdf documents)
+   See https://www.latex-project.org/get/
+    - The standard distribution for Macs (OSX) is MacTex.
+    - Windows users can use MiKTeX 
+    - Linux users probably already know what they are doing.
+    - (Tinytex is an R alternative)

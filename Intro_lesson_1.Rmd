@@ -434,6 +434,8 @@ protein_data <- read.table(file = "data/protein_processing_pred.csv",
 
 Don't worry - you do not need to be able to do this for the test. The next slide explains what happens.
 
+(The file can be downloaded here: https://raw.githubusercontent.com/MichielNoback/intro_R_lessons/master/data/protein_processing_pred.csv)
+
 -----
 
 ```{r loading_prot_data2, eval=FALSE}
