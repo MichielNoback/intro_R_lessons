@@ -20,7 +20,7 @@ By running the chunk below, load the data.
 
 ```{r}
 ##KEEPIT##
-foods_file <- "https://raw.githubusercontent.com/MichielNoback/R_data_analysis_and_visualization/master/exercises/data/food_constituents.txt"
+foods_file <- "https://raw.githubusercontent.com/MichielNoback/intro_R_lessons/gh-pages/data/food_constituents.txt"
 foods <- read.table(foods_file, header = TRUE)
 head(foods)
 ```
